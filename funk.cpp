@@ -1,7 +1,7 @@
 #include "header.h"
 #include "PSS_Normal.h"
 #include "PSS_Extended.h"
-#include <iostream>
+
 funk::funk(tch::FullTusurCommonConfig _config,_parametrs *parametrs)
 {
     _band = _config.bandwidth;
