@@ -37,7 +37,9 @@ void create_mark::config_all()
 
 void create_mark::configure_pss()
 {
+    MMCM(param);
     cofigure_plis();
+    
 }
 
 

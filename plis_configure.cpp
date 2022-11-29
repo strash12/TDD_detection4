@@ -10,6 +10,20 @@ plis_configure::plis_configure(_parametrs param)
 plis_configure::~plis_configure()
 {
 }
+void plis_configure::MMCM(_parametrs param)
+{
+    auto devmem = devmem::Devmem("/dev/mem", 0x83C30208, 4);
+    auto devmem2 = devmem::Devmem("/dev/mem", 0x83C30200, 4);
+    auto devmem3 = devmem::Devmem("/dev/mem", 0x83C3025C, 2);
+
+    devmem2.write<uint32_t>(0,param.MMCM_2);
+    devmem.write<uint32_t>(0,param.MMCM);
+    devmem3.write<uint16_t>(0, 0x3u);
+
+}
+
+
+
 
 void plis_configure::cofigure_plis()
 {

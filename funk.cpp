@@ -35,6 +35,7 @@ void funk::normal(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 75;
         parametrs->adreses1       = 0x020110DC;
+        parametrs ->MMCM            = 0x00000080;
         parametrs->windowing     = parametrs->fs/1000;
         parametrs->PSSreal = new double*[3];
 	parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B1.txt";
@@ -71,6 +72,7 @@ void funk::normal(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 150;
         parametrs->adreses1       = 0x010210D2;
+        parametrs ->MMCM            = 0x00000040;
         parametrs->windowing     = parametrs->fs/1000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
         parametrs->PSSreal = new double*[3];
@@ -106,6 +108,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
         parametrs->Ns            = 20;
         parametrs->OSC           = 300;
         parametrs->adreses1       = 0x00031136;
+        parametrs ->MMCM            = 0x00000020;
         parametrs->windowing     = parametrs->fs/1000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
         parametrs->PSSreal = new double*[3];
@@ -140,6 +143,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
         parametrs->Ns            = 20;
         parametrs->OSC           = 600;
         parametrs->adreses1       = 0x000411D2;
+        parametrs ->MMCM            = 0x00000010;
         parametrs->windowing     = parametrs->fs/1000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
 
@@ -175,6 +179,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
         parametrs->Ns            = 20;
         parametrs->OSC           = 900;
         parametrs->adreses1       = 0x000511A4;
+        parametrs ->MMCM            = 0x00029A0A;
         parametrs->windowing     = parametrs->fs/2000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
 
@@ -210,6 +215,8 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
         parametrs->Ns            = 20;
         parametrs->OSC           = 1200;
         parametrs->adreses1       = 0x000611AE;
+        parametrs ->MMCM            = 0x00000008;
+        
         parametrs->windowing     = parametrs->fs/2000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B6.txt";
 
@@ -256,17 +263,22 @@ void funk::extetended(_parametrs *parametrs)
          parametrs->Ns            = 20;
          parametrs->OSC           = 75;
          parametrs->adreses1       = 0x000110DC;
+         parametrs ->MMCM            = 0x00000080;
+         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B1.txt";
          parametrs->windowing     = parametrs->fs/1000;
-         parametrs->PSSreal = new double*[3];
+         
+        parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)
         parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
+        
         parametrs->PSSimag = new double*[3];
             for (int i = 0; i < 3; ++i)
         parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+            
             for (int i = 0; i < 3; i++){
-                for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
-        parametrs->PSSreal[i][j]=PSS128real_e[i][j];
-        parametrs->PSSimag[i][j]=PSS128imag_e[i][j];
+                for(int j = 0;j<parametrs->fftsize+parametrs->cp;j++){
+        parametrs->PSSreal[i][j] = PSS128real_e[i][j];
+        parametrs->PSSimag[i][j] = PSS128imag_e[i][j];
             }
         }
          
@@ -289,6 +301,8 @@ void funk::extetended(_parametrs *parametrs)
         parametrs->Ns             = 20;
         parametrs->OSC           = 150;
         parametrs->adreses1       = 0x000210D2;
+        parametrs ->MMCM            = 0x00000040;
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
         parametrs->windowing     = parametrs->fs/2000;
         parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)
@@ -323,6 +337,8 @@ void funk::extetended(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 300;
         parametrs->adreses1       = 0x00031136;
+         parametrs ->MMCM            = 0x00000020;
+         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
         parametrs->windowing     = parametrs->fs/2000;
         parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)
@@ -356,6 +372,8 @@ void funk::extetended(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 600;
         parametrs->adreses1       = 0x000411D2;
+        parametrs ->MMCM            = 0x00000010;
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
         parametrs->windowing     = parametrs->fs/1000;
         parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)
@@ -389,6 +407,8 @@ void funk::extetended(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 900;
         parametrs->adreses1       = 0x000511A4;
+        parametrs ->MMCM            = 0x00029A0A;
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
         parametrs->windowing     = parametrs->fs/1000;
         parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)
@@ -422,6 +442,8 @@ void funk::extetended(_parametrs *parametrs)
         parametrs->Ns            = 20;
         parametrs->OSC           = 1200;
         parametrs->adreses1       = 0x000611AE;
+        parametrs ->MMCM            = 0x00000008;
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B6.txt";
         parametrs->windowing     = parametrs->fs/2000;
         parametrs->PSSreal = new double*[3];
             for (int i = 0; i < 3; ++i)

@@ -24,6 +24,8 @@ struct _parametrs
 {
         int fftsize,cp,cp1,Nrb,Lb,i1start,i1fin,i2start,i2fin,Nc,Nsc,Nrb_Max,Nrb_Min,Ns,OSC,fs,Cor_lvl,cyclic,shift,windowing; 
         uint32_t adreses1;
+        uint32_t MMCM;
+        uint32_t MMCM_2 = 0x00002004;
         double** PSSreal;
         double** PSSimag;
 	std::string path;  
@@ -125,6 +127,7 @@ public:
     plis_configure(_parametrs param);
     ~plis_configure();
     void cofigure_plis();
+    void MMCM(_parametrs param);
     void SSS_upload(int,_parametrs param);
     bool validate();
 };
