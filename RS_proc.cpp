@@ -4,41 +4,57 @@
 RS_proc::RS_proc(_parametrs _param,int first,std::vector<int16_t> real,std::vector<int16_t> imag,int Cellid)
 :REAL(real),IMAG(imag)
 {
-cellid = Cellid;
- param   = _param;
- Frame_size = param.fs/100;
- Slot_size = param.fs/2000;
- sub = param.fs/1e3;   
-
- fr1 = first - 2*param.fftsize  -param.cp- sub-param.cp;
- fr2 = first - 2*param.fftsize - param.cp - param.cp1 - sub + sub*10-1;
- fr3 = first + 12*param.fftsize + param.cp1 + 11*param.cp - 1 + 8*sub + sub*10+1;
- fr4 = first - 2*param.fftsize - param.cp - param.cp1 - sub-1;
- fr5 = first + 12*param.fftsize + param.cp1 + 11*param.cp - 1 + 8*sub+1;
-
-rs_signal_fixed_real = new float*[2*param.Nrb];
-     for(int i = 0; i <2*param.Nrb;i++)
-     {
-        rs_signal_fixed_real[i] = new float [param.Ns*2];
-     }
-     
-    rs_signal_fixed_imag = new float*[2*param.Nrb];
-     for(int i = 0; i <2*param.Nrb;i++)
-     {
-        rs_signal_fixed_imag[i] = new float [param.Ns*2];
-     }
-     
-    rs_space_index = new int*[2*param.Nrb];
-     for(int i = 0; i <2*param.Nrb;i++)
-     {
-        rs_space_index[i] = new int [param.Ns*2];
-     }
-
+    cellid = Cellid;
+    param   = _param;
+    Frame_size = param.fs/100;
+    Slot_size = param.fs/2000;
+    sub = param.fs/1e3;   
+    set_param(first);
+    init_array();
 }
 
 
 
+void RS_proc::set_param(int first)
+{
+ fr1        = first - 2 * param.fftsize - param.cp  - sub - param.cp;
+ fr2_normal = first - 2 * param.fftsize - param.cp  - param.cp1 - sub + sub*10-1;
+ fr3_normal = first + 12* param.fftsize + param.cp1 + 11 * param.cp - 1 + 8*sub + sub*10+1;
+ fr4_normal = first - 2 * param.fftsize - param.cp  - param.cp1 - sub - 1;
+ fr5_normal = first + 12* param.fftsize + param.cp1 + 11 *param.cp  - 1 + 8*sub+1;
 
+ fr2_ext    = first - 2 * param.fftsize - 2  * param.cp - sub + sub *10-1; 
+ fr3_ext    = first + 10* param.fftsize + 10 * param.cp - 1 + 8 * sub + sub *10;
+ fr4_ext    = first - 2 * param.fftsize - 2  * param.cp - sub -1;
+ fr5_ext    = first + 10* param.fftsize + 10 * param.cp - 1 + 8 *sub ;
+
+ std::cout<<"\nfr1 = "<<fr1<<std::endl;
+ std::cout<<"fr2 = "<<fr2_ext<<std::endl;
+ std::cout<<"fr3 = "<<fr3_ext<<std::endl;
+ std::cout<<"fr4 = "<<fr4_ext<<std::endl;
+ std::cout<<"fr5 = "<<fr5_ext<<std::endl;
+}
+
+void RS_proc::init_array()
+{
+    rs_signal_fixed_real = new float*[2*param.Nrb];
+        for(int i = 0; i <2*param.Nrb;i++)
+            {
+                rs_signal_fixed_real[i] = new float [param.Ns*2];
+            }
+     
+    rs_signal_fixed_imag = new float*[2*param.Nrb];
+        for(int i = 0; i <2*param.Nrb;i++)
+            {
+                rs_signal_fixed_imag[i] = new float [param.Ns*2];
+            }
+     
+    rs_space_index = new int*[2*param.Nrb];
+        for(int i = 0; i <2*param.Nrb;i++)
+            {
+                rs_space_index[i] = new int [param.Ns*2];
+            }
+}
 
 
 void RS_proc::Frame_cut()
@@ -46,22 +62,41 @@ void RS_proc::Frame_cut()
 
 std::vector <int16_t> Frame_real(Frame_size);
 std::vector <int16_t> Frame_imag(Frame_size);
+
+
    if (fr1 < 1)
-{
-	std::copy(REAL.begin()+fr2,REAL.begin()+fr3,Frame_real.begin());
-	std::copy(IMAG.begin()+fr2,IMAG.begin()+fr3,Frame_imag.begin());
+{       if (param.cyclic == 1)
+            {
+	            std::copy(REAL.begin()+fr2_normal,REAL.begin()+fr3_normal,Frame_real.begin());
+	            std::copy(IMAG.begin()+fr2_normal,IMAG.begin()+fr3_normal,Frame_imag.begin());
+            }
+        else if (param.cyclic == 2)
+            {
+	            std::copy(REAL.begin()+fr2_ext,REAL.begin()+fr3_ext,Frame_real.begin());
+	            std::copy(IMAG.begin()+fr2_ext,IMAG.begin()+fr3_ext,Frame_imag.begin());
+            }
 	
 }
-  
-else if(fr1>1)
-   
-{
 
-	std::copy(REAL.begin()+fr4,REAL.begin()+fr5,Frame_real.begin());
-	std::copy(IMAG.begin()+fr4,IMAG.begin()+fr5,Frame_imag.begin());
- 	
+
+
+else if(fr1>1)
+  
+{
+    if(param.cyclic == 1)
+        {
+	        std::copy(REAL.begin()+fr4_normal,REAL.begin()+fr5_normal,Frame_real.begin());
+	        std::copy(IMAG.begin()+fr4_normal,IMAG.begin()+fr5_normal,Frame_imag.begin());
+        }
+    else if (param.cyclic == 2)
+        {
+	        std::copy(REAL.begin()+fr4_ext,REAL.begin()+fr5_ext,Frame_real.begin());
+	        std::copy(IMAG.begin()+fr4_ext,IMAG.begin()+fr5_ext,Frame_imag.begin());
+        }
 }
+
    Slot_cut(Frame_real,Frame_imag);
+   
     
 }
 
@@ -270,6 +305,6 @@ else if(TDD_conf == TDD6)
 
 RS_proc::~RS_proc()
 {
-
+ 
 
 }

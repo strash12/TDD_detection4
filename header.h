@@ -227,7 +227,7 @@ class RS_proc
 private:
     int Frame_size,Slot_size,cellid;
     int sub;
-    int point,fr1,fr2,fr3,fr4,fr5,size1,size2;
+    int point,fr1,fr2_normal,fr3_normal,fr4_normal,fr5_normal,fr2_ext,fr3_ext,fr4_ext,fr5_ext,size1,size2;
     _parametrs param;
     std::vector<int16_t> REAL;
     std::vector<int16_t> IMAG;      
@@ -237,6 +237,8 @@ private:
     std::array<int,10> TDD_conf;
 public:
     RS_proc(_parametrs _param,int first,std::vector<int16_t> real,std::vector<int16_t> imag,int Cellid);
+    void set_param(int first);
+    void init_array();
     void Frame_cut();
     void Slot_cut(std::vector <int16_t> Frame_real,std::vector <int16_t> Frame_imag);
     void ST();
