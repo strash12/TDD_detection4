@@ -75,8 +75,8 @@ protected:
 	virtual tch::FullTusurCommonConfig handle_configure() override {
 		auto msg = "from c++ handle_configure";
 		funk config(_config,&param);
-		
 		create_mark(param,_config);
+		config.clear_memory(&param);
 		//std::string msg2 = "fftsize = " + std::to_string (param.fftsize) ;
 		//std::cout << msg << std::endl;
 		//tch::write_common(msg2);

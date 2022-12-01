@@ -1,0 +1,4 @@
+/home/qwerty/Изображения/TDD_detection4/build/CMakeFiles/rebuild_cache.dir
+/home/qwerty/Изображения/TDD_detection4/build/CMakeFiles/edit_cache.dir
+/home/qwerty/Изображения/TDD_detection4/build/CMakeFiles/TDD_DETECTION.dir
+/home/qwerty/Изображения/TDD_detection4/build/CMakeFiles/lib.dir

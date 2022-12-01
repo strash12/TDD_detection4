@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/TDD_DETECTION.dir/main.cpp.o  -o TDD_DETECTION  -Wl,-rpath,/home/qwerty/Изображения/TDD_detection4 liblib.a -lfftw3 ../libtch.so 

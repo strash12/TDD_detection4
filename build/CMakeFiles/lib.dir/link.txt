@@ -1,0 +1,2 @@
+/usr/bin/ar qc liblib.a  CMakeFiles/lib.dir/create_mark.cpp.o CMakeFiles/lib.dir/FFT_TRANS.cpp.o CMakeFiles/lib.dir/freq_shift.cpp.o CMakeFiles/lib.dir/funk.cpp.o CMakeFiles/lib.dir/logger.cpp.o CMakeFiles/lib.dir/plis_configure.cpp.o CMakeFiles/lib.dir/NRS_GEN.cpp.o CMakeFiles/lib.dir/PSS_corr.cpp.o CMakeFiles/lib.dir/RS_proc.cpp.o CMakeFiles/lib.dir/SSS_PROC.cpp.o CMakeFiles/lib.dir/TDD_detection.cpp.o
+/usr/bin/ranlib liblib.a

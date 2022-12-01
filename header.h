@@ -1,6 +1,9 @@
 #ifndef header
 #define header
 
+#include <string_view>
+#include <cstring>
+#include <iostream>
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -20,6 +23,8 @@
 #include "devmem.hpp"
 #include "dmac.hpp"
 #include <cstdlib>
+
+
 struct _parametrs
 {
         int fftsize,cp,cp1,Nrb,Lb,i1start,i1fin,i2start,i2fin,Nc,Nsc,Nrb_Max,Nrb_Min,Ns,OSC,fs,Cor_lvl,cyclic,shift,windowing; 
@@ -28,7 +33,7 @@ struct _parametrs
         uint32_t MMCM_2 = 0x00002004;
         double** PSSreal;
         double** PSSimag;
-	std::string path;  
+	    std::string path;  
 };
 
 class funk
@@ -41,7 +46,9 @@ class funk
         ~funk();
         void normal(_parametrs *p1);
         void extetended(_parametrs *p1);
-        void set_prefix(_parametrs *p1);        
+        void set_prefix(_parametrs *p1);
+        void memory_alloc(_parametrs *p1);
+        void clear_memory(_parametrs *p1);        
 };
 
 class PSS_corr
@@ -246,4 +253,17 @@ public:
     void TDD_config(int& TDD_config);
     ~RS_proc();
 };
+
+
+class logger
+{
+private:
+    std::string m_error;
+public:
+    logger(std::string error);
+    const char* getError();
+    ~logger();
+};
+
+
 #endif

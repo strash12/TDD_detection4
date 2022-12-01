@@ -37,6 +37,8 @@ void RS_proc::set_param(int first)
 
 void RS_proc::init_array()
 {
+        try
+    {
     rs_signal_fixed_real = new float*[2*param.Nrb];
         for(int i = 0; i <2*param.Nrb;i++)
             {
@@ -54,6 +56,12 @@ void RS_proc::init_array()
             {
                 rs_space_index[i] = new int [param.Ns*2];
             }
+    }
+    catch (std::bad_alloc ba)
+        {
+            std::cout<<"no memory allocated"<<std::endl;
+            std::cout<<ba.what()<<std::endl;
+        }
 }
 
 
@@ -305,6 +313,15 @@ else if(TDD_conf == TDD6)
 
 RS_proc::~RS_proc()
 {
- 
+ /*for(int i = 0; i<2*param.Nrb; i ++)
+    {
+        delete[] rs_signal_fixed_real[i];
+        delete[] rs_signal_fixed_imag[i];
+        delete[] rs_space_index[i];
+    }
+
+    delete[] rs_signal_fixed_real;
+    delete[] rs_signal_fixed_imag;
+    delete[] rs_space_index;*/
 
 }

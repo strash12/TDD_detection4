@@ -9,9 +9,7 @@ funk::funk(tch::FullTusurCommonConfig _config,_parametrs *parametrs)
     funk::set_prefix(parametrs);
 }
 
-funk::~funk()
-{
-}
+
 
 void funk::normal(_parametrs *parametrs)
 {
@@ -37,19 +35,16 @@ void funk::normal(_parametrs *parametrs)
         parametrs->adreses1       = 0x020110DC;
         parametrs ->MMCM            = 0x00000080;
         parametrs->windowing     = parametrs->fs/1000;
-        parametrs->PSSreal = new double*[3];
-	parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B1.txt";
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
-            for (int i = 0; i < 3; i++){
-                for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
-        parametrs->PSSreal[i][j]=PSS128real[i][j]*1000000;
-        parametrs->PSSimag[i][j]=PSS128imag[i][j]*1000000;
-            }
-        }
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B1.txt";
+        memory_alloc(parametrs);
+            for (int i = 0; i < 3; i++)
+                {
+                    for(int j=0;j<parametrs->fftsize+parametrs->cp;j++)
+                        {
+                            parametrs->PSSreal[i][j]=PSS128real[i][j]*1000000;
+                            parametrs->PSSimag[i][j]=PSS128imag[i][j]*1000000;
+                        }
+                }
 
 
     break;
@@ -74,13 +69,8 @@ void funk::normal(_parametrs *parametrs)
         parametrs->adreses1       = 0x010210D2;
         parametrs ->MMCM            = 0x00000040;
         parametrs->windowing     = parametrs->fs/1000;
-parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS256real[i][j]*1000000;
@@ -111,12 +101,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
         parametrs ->MMCM            = 0x00000020;
         parametrs->windowing     = parametrs->fs/1000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+       memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS512real[i][j]*1000000;
@@ -147,12 +132,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
         parametrs->windowing     = parametrs->fs/1000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
 
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS1024real[i][j]*1000000;
@@ -183,12 +163,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
         parametrs->windowing     = parametrs->fs/2000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
 
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS1536real[i][j]*1000000;
@@ -220,12 +195,7 @@ parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
         parametrs->windowing     = parametrs->fs/2000;
 parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B6.txt";
 
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS2048real[i][j]*1000000;
@@ -267,13 +237,7 @@ void funk::extetended(_parametrs *parametrs)
          parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B1.txt";
          parametrs->windowing     = parametrs->fs/1000;
          
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             
             for (int i = 0; i < 3; i++){
                 for(int j = 0;j<parametrs->fftsize+parametrs->cp;j++){
@@ -304,12 +268,7 @@ void funk::extetended(_parametrs *parametrs)
         parametrs ->MMCM            = 0x00000040;
         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B2.txt";
         parametrs->windowing     = parametrs->fs/2000;
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+       memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS256real_e[i][j];
@@ -340,12 +299,7 @@ void funk::extetended(_parametrs *parametrs)
          parametrs ->MMCM            = 0x00000020;
          parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B3.txt";
         parametrs->windowing     = parametrs->fs/2000;
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS512real_e[i][j];
@@ -375,12 +329,7 @@ void funk::extetended(_parametrs *parametrs)
         parametrs ->MMCM            = 0x00000010;
         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B4.txt";
         parametrs->windowing     = parametrs->fs/1000;
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS1024real[i][j];
@@ -410,12 +359,7 @@ void funk::extetended(_parametrs *parametrs)
         parametrs ->MMCM            = 0x00029A0A;
         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B5.txt";
         parametrs->windowing     = parametrs->fs/1000;
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS1536real_e[i][j];
@@ -445,12 +389,7 @@ void funk::extetended(_parametrs *parametrs)
         parametrs ->MMCM            = 0x00000008;
         parametrs->path   = "/root/test/tusur/TDD_detection2/signal/SSS_array_B6.txt";
         parametrs->windowing     = parametrs->fs/2000;
-        parametrs->PSSreal = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSreal[i] = new double[parametrs->fftsize+parametrs->cp];
-        parametrs->PSSimag = new double*[3];
-            for (int i = 0; i < 3; ++i)
-        parametrs->PSSimag[i] = new double[parametrs->fftsize+parametrs->cp];
+        memory_alloc(parametrs);
             for (int i = 0; i < 3; i++){
                 for(int j=0;j<parametrs->fftsize+parametrs->cp;j++){
         parametrs->PSSreal[i][j]=PSS2048real_e[i][j];
@@ -478,4 +417,38 @@ void funk::set_prefix(_parametrs *p1)
     }
 }
 
+void funk::memory_alloc(_parametrs *p1)
+{
+    try
+        {
+        p1->PSSreal = new double*[3];
+	
+            for (int i = 0; i < 3; ++i)
+        p1->PSSreal[i] = new double[p1->fftsize+p1->cp];
+        p1->PSSimag = new double*[3];
+            for (int i = 0; i < 3; ++i)
+        p1->PSSimag[i] = new double[p1->fftsize+p1->cp];
+        }
 
+        catch (std::bad_alloc ba)
+        {
+            std::cout<<"no memory allocated"<<std::endl;
+            std::cout<<ba.what()<<std::endl;
+        }
+}
+
+void funk::clear_memory(_parametrs *p1)
+{
+    for(int i = 0; i<3; i ++)
+    {
+        delete[] p1->PSSreal[i];
+        delete[] p1->PSSimag[i];
+    }
+
+    delete[] p1->PSSreal;
+    delete[] p1->PSSimag;
+}
+
+funk::~funk()
+{
+}
